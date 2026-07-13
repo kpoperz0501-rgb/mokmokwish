@@ -6,26 +6,33 @@
 }
 body {
   background-color: #fdbf00;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
 }
 .card {
   width: 640px;
   height: 400px;
-  position: absolute;
-  margin: auto;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
+  position: relative; /* Changed from absolute for better mobile layout behavior */
   -webkit-perspective: 1200px;
   perspective: 1200px;
   transition: 1s;
 }
-.card:hover {
+
+/* Supports both desktop hover AND mobile tap/active states */
+.card:hover,
+.card:active,
+.card:focus {
   transform: rotate(-5deg);
 }
-.card:hover .outside {
+.card:hover .outside,
+.card:active .outside,
+.card:focus .outside {
   transform: rotateY(-130deg);
 }
+
 .outside,
 .inside {
   height: 100%;
@@ -35,30 +42,25 @@ body {
 }
 .inside {
   background: linear-gradient(to right, #e7e7e7, #ffffff 30%);
-  padding: 20px; /* Adjusted padding to give text breathing room */
+  padding: 20px;
   text-align: center;
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Centering content nicely */
+  justify-content: center;
   align-items: center;
-  gap: 15px; /* Adds space between the paragraphs and the gift emoji */
+  gap: 15px;
   left: 50%;
 }
-
-/* New specific styling for your romantic message paragraphs */
 .inside p {
   font-size: 14px;
   line-height: 1.6;
   color: #333333;
 }
-
-/* Making the main greeting stand out slightly */
 .inside p:first-of-type {
   font-weight: bold;
   font-size: 18px;
-  color: #ff3366; /* Gives a subtle romantic touch to "Happy 27th Birthday My Love!" */
+  color: #ff3366;
 }
-
 .outside {
   -webkit-transform-style: preserve-3d;
   transform-style: preserve-3d;
@@ -151,6 +153,39 @@ body {
   color: #000046;
 }
 .inside h1 {
-  font-size: 80px; /* Reduced slightly from 120px so everything fits the 400px card height */
+  font-size: 80px;
   line-height: 1;
+}
+
+/* ==========================================================
+   📱 MOBILE RESPONSIVE STYLES (For screens under 680px wide)
+   ========================================================== */
+@media (max-width: 680px) {
+  .card {
+    width: 90vw;       /* Scale card width down relative to phone viewport */
+    height: 55vh;      /* Scale card height down relative to phone viewport */
+    max-height: 380px; /* Restrict height so it stays crisp */
+  }
+  .outside p {
+    font-size: 16px;   /* Shrink "Happy Birthday" text on front */
+    letter-spacing: 3px;
+  }
+  .cake {
+    transform: scale(0.75); /* Shrinks the cake graphic to fit the mobile card size */
+    bottom: 15px;
+  }
+  .inside {
+    padding: 10px;     /* Tighter padding on mobile so text doesn't overflow */
+    gap: 8px;
+  }
+  .inside p:first-of-type {
+    font-size: 14px;   /* "Happy 27th Birthday My Love!" */
+  }
+  .inside p {
+    font-size: 11px;   /* Smaller paragraph text for your love note */
+    line-height: 1.4;
+  }
+  .inside h1 {
+    font-size: 45px;   /* Shrinks the gift box emoji 🎁 */
+  }
 }
