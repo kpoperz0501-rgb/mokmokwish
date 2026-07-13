@@ -5,12 +5,10 @@
   font-family: "Poppins", sans-serif;
 }
 
-/* Setup a clean, non-overflowing base viewport */
 html, body {
   width: 100%;
   height: 100%;
-  overflow-x: hidden;
-  overflow-y: auto; /* Allows subtle bounce scrolling if the screen is tiny, preventing cut-offs */
+  overflow: hidden; /* Stops mobile rendering engines from adding micro scrollbars */
   background-color: #fdbf00;
 }
 
@@ -18,36 +16,34 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px;
 }
 
-/* The Wrapper ensures the 640x400 aspect ratio NEVER warps */
+/* Container ensures absolute spacing math evaluates correctly from the true center */
+.phone-container {
+  position: relative;
+  width: 640px;
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Original card dimensions completely retained */
 .card {
   width: 640px;
   height: 400px;
-  position: relative;
+  position: absolute;
   -webkit-perspective: 1200px;
   perspective: 1200px;
-  transition: transform 1s;
-  transform-origin: center center;
+  transition: 1s;
 }
 
-/* Universal hover/active touch controls */
+/* Interactive triggers for both computer cursor hovers and phone taps */
 .card:hover,
 .card:active,
 .card:focus {
   transform: rotate(-5deg);
 }
-
-/* Scale trick for mobile: keeps the exact shape intact */
-@media (max-width: 680px) {
-  .card:hover,
-  .card:active,
-  .card:focus {
-    transform: scale(var(--mobile-scale, 0.52)) rotate(-5deg);
-  }
-}
-
 .card:hover .outside,
 .card:active .outside,
 .card:focus .outside {
@@ -61,28 +57,26 @@ body {
   position: absolute;
   left: 50.1%;
 }
-
 .inside {
   background: linear-gradient(to right, #e7e7e7, #ffffff 30%);
-  padding: 20px;
+  padding: 25px 20px;
   text-align: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 15px;
+  gap: 12px;
   left: 50%;
 }
 
 .inside p {
-  font-size: 14px;
-  line-height: 1.6;
+  font-size: 13px;
+  line-height: 1.5;
   color: #333333;
 }
-
 .inside p:first-of-type {
   font-weight: bold;
-  font-size: 18px;
+  font-size: 16px;
   color: #ff3366;
 }
 
@@ -94,7 +88,6 @@ body {
   transition: 2s;
   cursor: pointer;
 }
-
 .front,
 .back {
   height: 100%;
@@ -104,22 +97,18 @@ body {
   backface-visibility: hidden;
   transform: rotateX(0deg);
 }
-
 .front {
   background-color: #ffffff;
 }
-
 .back {
   transform: rotateY(180deg);
   background: linear-gradient(to left, #e7e7e7, #ffffff 30%);
 }
-
 .cake {
   width: 100%;
   position: absolute;
   bottom: 30px;
 }
-
 .top-layer,
 .middle-layer,
 .bottom-layer {
@@ -139,17 +128,14 @@ body {
   position: relative;
   margin: auto;
 }
-
 .middle-layer {
   transform: scale(0.85);
   top: 6px;
 }
-
 .top-layer {
   transform: scale(0.7);
   top: 26px;
 }
-
 .candle {
   height: 45px;
   width: 15px;
@@ -166,7 +152,6 @@ body {
   right: 0;
   bottom: 202px;
 }
-
 .candle:before {
   content: "";
   position: absolute;
@@ -178,7 +163,6 @@ body {
   transform: rotate(45deg);
   left: -1px;
 }
-
 .outside p {
   font-size: 23px;
   text-transform: uppercase;
@@ -187,22 +171,18 @@ body {
   letter-spacing: 6px;
   color: #000046;
 }
-
 .inside h1 {
-  font-size: 80px;
+  font-size: 65px;
   line-height: 1;
 }
 
 /* ==========================================================
-   📱 XIAOMI & TALL PHONE VIEWPORT FIX
+   📱 MOBILE PROPORTIONAL DISPLAY AUTO-LOCK 
    ========================================================== */
 @media (max-width: 680px) {
-  .card {
-    /* Uses dynamic math based on viewport width to scale proportionally */
-    --mobile-scale: calc(90vw / 640); 
-    transform: scale(var(--mobile-scale));
-    
-    /* Locks the aspect ratio down hard */
-    aspect-ratio: 640 / 400; 
+  .phone-container {
+    /* Dynamic scaling ensures layout geometry behaves identically to desktop */
+    transform: scale(calc(92vw / 640));
+    transform-origin: center center;
   }
 }
