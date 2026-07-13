@@ -18,7 +18,7 @@ body {
   align-items: center;
 }
 
-/* Base card layout for Desktop computers */
+/* Base card layout - Looks perfect on Desktop */
 .card {
   width: 640px;
   height: 400px;
@@ -28,7 +28,7 @@ body {
   transition: 1s;
 }
 
-/* Interaction triggers for both cursor hovers and phone taps */
+/* Seamless triggers for computer mouse hovers and mobile screen taps */
 .card:hover,
 .card:active,
 .card:focus {
@@ -167,30 +167,14 @@ body {
 }
 
 /* ==========================================================
-   📱 THE ABSOLUTE CAKE & CARD MOBILE CENTER FIX 
+   📱 CLEAN PHONE SHRUNK FIX (No more code clipping!)
    ========================================================== */
 @media (max-width: 680px) {
-  /* Forces the layout structural container block to sit perfectly centered */
+  /* Scales the entire desktop environment safely inside your phone view */
   .card {
-    width: 320px; 
-    height: 220px;
-    margin-left: -160px; /* Pulls the card back over to the true screen center */
+    transform: scale(0.5); 
+    transform-origin: center center;
+    /* Shifts the absolute anchor back to dead center on mobile screen specs */
+    margin-left: -160px; 
   }
-  
-  /* Centers the front header text */
-  .outside p {
-    font-size: 13px;
-    letter-spacing: 2px;
-    margin-top: 15px;
-  }
-  
-  /* This shrinks the cake block inside the new card container size */
-  .cake {
-    width: 100%;
-    left: 0;
-    right: 0;
-    margin: auto;
-    transform: scale(0.5);
-    transform-origin: bottom center;
-    bottom: 10px;
-  }
+}
