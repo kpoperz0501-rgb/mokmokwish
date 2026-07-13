@@ -16,7 +16,6 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px;
 }
 
 /* Base card layout for Desktop computers */
@@ -168,36 +167,35 @@ body {
 }
 
 /* ==========================================================
-   📱 CLEAN PHONE SHRUNK FIX (No more cutting off!)
+   📱 PHONE ALIGNMENT HARD LOCK (Shifts structural box left)
    ========================================================== */
 @media (max-width: 680px) {
-  /* Make the card small enough to fit completely inside any phone screen */
   .card {
     width: 320px; 
     height: 220px;
+    /* This negative margin offsets the 50% shift to place the cake dead center */
+    margin-left: -160px; 
   }
   
-  /* Shrink the front layout text */
   .outside p {
     font-size: 13px;
     letter-spacing: 2px;
     margin-top: 15px;
   }
   
-  /* Shrink the entire cake graphic globally to match the card */
   .cake {
     transform: scale(0.5);
     transform-origin: bottom center;
     bottom: 10px;
   }
   
-  /* Adjust inside box for tiny text presentation */
   .inside {
     padding: 10px;
     gap: 5px;
   }
   
   .inside p:first-of-type {
+    font-weight: bold;
     font-size: 11px;
   }
   
