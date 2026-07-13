@@ -5,45 +5,46 @@
   font-family: "Poppins", sans-serif;
 }
 
-/* Force body to fit the screen without allowing phone browsers to create massive zoom scrollbars */
+/* Setup a clean, non-overflowing base viewport */
 html, body {
   width: 100%;
   height: 100%;
-  overflow: hidden; 
+  overflow-x: hidden;
+  overflow-y: auto; /* Allows subtle bounce scrolling if the screen is tiny, preventing cut-offs */
+  background-color: #fdbf00;
 }
 
 body {
-  background-color: #fdbf00;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 10px;
+  padding: 20px;
 }
 
-/* RESTORED: Exact original card dimensions */
+/* The Wrapper ensures the 640x400 aspect ratio NEVER warps */
 .card {
   width: 640px;
   height: 400px;
   position: relative;
   -webkit-perspective: 1200px;
   perspective: 1200px;
-  transition: 1s;
-  transform-origin: center center; /* Ensures smooth mobile scaling from center */
+  transition: transform 1s;
+  transform-origin: center center;
 }
 
-/* Supports desktop hover AND mobile tap active states */
+/* Universal hover/active touch controls */
 .card:hover,
 .card:active,
 .card:focus {
   transform: rotate(-5deg);
 }
 
-/* Trick to keep it tilted on mobile tap if it scaled down */
+/* Scale trick for mobile: keeps the exact shape intact */
 @media (max-width: 680px) {
   .card:hover,
   .card:active,
   .card:focus {
-    transform: scale(var(--mobile-scale, 0.5)) rotate(-5deg);
+    transform: scale(var(--mobile-scale, 0.52)) rotate(-5deg);
   }
 }
 
@@ -73,7 +74,6 @@ body {
   left: 50%;
 }
 
-/* Custom styling for your romantic message paragraphs */
 .inside p {
   font-size: 14px;
   line-height: 1.6;
@@ -194,20 +194,15 @@ body {
 }
 
 /* ==========================================================
-   📱 MOBILE AUTO-SCALE FIX (Keeps original dimensions intact)
+   📱 XIAOMI & TALL PHONE VIEWPORT FIX
    ========================================================== */
 @media (max-width: 680px) {
   .card {
-    /* Uses a CSS variable to dynamically shrink the 640x400 block onto the screen size */
-    --mobile-scale: 0.52; 
+    /* Uses dynamic math based on viewport width to scale proportionally */
+    --mobile-scale: calc(90vw / 640); 
     transform: scale(var(--mobile-scale));
-  }
-}
-
-/* iPhone SE / very narrow screens */
-@media (max-width: 360px) {
-  .card {
-    --mobile-scale: 0.45;
-    transform: scale(var(--mobile-scale));
+    
+    /* Locks the aspect ratio down hard */
+    aspect-ratio: 640 / 400; 
   }
 }
