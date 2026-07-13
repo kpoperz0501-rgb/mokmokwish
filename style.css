@@ -167,44 +167,30 @@ body {
 }
 
 /* ==========================================================
-   📱 PHONE ALIGNMENT HARD LOCK (Shifts structural box left)
+   📱 THE ABSOLUTE CAKE & CARD MOBILE CENTER FIX 
    ========================================================== */
 @media (max-width: 680px) {
+  /* Forces the layout structural container block to sit perfectly centered */
   .card {
     width: 320px; 
     height: 220px;
-    /* This negative margin offsets the 50% shift to place the cake dead center */
-    margin-left: -160px; 
+    margin-left: -160px; /* Pulls the card back over to the true screen center */
   }
   
+  /* Centers the front header text */
   .outside p {
     font-size: 13px;
     letter-spacing: 2px;
     margin-top: 15px;
   }
   
+  /* This shrinks the cake block inside the new card container size */
   .cake {
+    width: 100%;
+    left: 0;
+    right: 0;
+    margin: auto;
     transform: scale(0.5);
     transform-origin: bottom center;
     bottom: 10px;
   }
-  
-  .inside {
-    padding: 10px;
-    gap: 5px;
-  }
-  
-  .inside p:first-of-type {
-    font-weight: bold;
-    font-size: 11px;
-  }
-  
-  .inside p {
-    font-size: 8.5px;
-    line-height: 1.3;
-  }
-  
-  .inside h1 {
-    font-size: 30px;
-  }
-}
