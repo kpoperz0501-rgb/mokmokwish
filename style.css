@@ -8,7 +8,7 @@
 html, body {
   width: 100%;
   height: 100%;
-  overflow: hidden; /* Stops mobile rendering engines from adding micro scrollbars */
+  overflow: hidden; 
   background-color: #fdbf00;
 }
 
@@ -18,7 +18,7 @@ body {
   align-items: center;
 }
 
-/* Container ensures absolute spacing math evaluates correctly from the true center */
+/* Container keeps the original proportions intact */
 .phone-container {
   position: relative;
   width: 640px;
@@ -28,7 +28,6 @@ body {
   align-items: center;
 }
 
-/* Original card dimensions completely retained */
 .card {
   width: 640px;
   height: 400px;
@@ -38,7 +37,7 @@ body {
   transition: 1s;
 }
 
-/* Interactive triggers for both computer cursor hovers and phone taps */
+/* Interaction triggers for desktop hover and mobile tap active states */
 .card:hover,
 .card:active,
 .card:focus {
@@ -177,12 +176,12 @@ body {
 }
 
 /* ==========================================================
-   📱 MOBILE PROPORTIONAL DISPLAY AUTO-LOCK 
+   📱 MOBILE PROPORTIONAL ZOOM OUT FIX
    ========================================================== */
 @media (max-width: 680px) {
   .phone-container {
-    /* Dynamic scaling ensures layout geometry behaves identically to desktop */
-    transform: scale(calc(92vw / 640));
+    /* Adjusted from 92vw to 82vw to slightly zoom out on phones */
+    transform: scale(calc(82vw / 640));
     transform-origin: center center;
   }
 }
